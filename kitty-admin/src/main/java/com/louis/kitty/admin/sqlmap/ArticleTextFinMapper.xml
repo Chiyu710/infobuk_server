@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis.kitty.admin.dao.ArticleTextFinMapper">
+  <resultMap id="BaseResultMap" type="com.louis.kitty.admin.model.ArticleTextFin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rawid" jdbcType="INTEGER" property="rawid" />
+    <result column="tagid" jdbcType="INTEGER" property="tagid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="data" jdbcType="DATE" property="data" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.louis.kitty.admin.model.ArticleTextFin">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rawid, tagid, title, author, `data`, likes, url
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article_text_fin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article_text_fin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.louis.kitty.admin.model.ArticleTextFin" useGeneratedKeys="true">
+    insert into article_text_fin (rawid, tagid, title, 
+      author, `data`, likes, url, 
+      content)
+    values (#{rawid,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{data,jdbcType=DATE}, #{likes,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.louis.kitty.admin.model.ArticleTextFin" useGeneratedKeys="true">
+    insert into article_text_fin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rawid != null">
+        rawid,
+      </if>
+      <if test="tagid != null">
+        tagid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="data != null">
+        `data`,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rawid != null">
+        #{rawid,jdbcType=INTEGER},
+      </if>
+      <if test="tagid != null">
+        #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=DATE},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.louis.kitty.admin.model.ArticleTextFin">
+    update article_text_fin
+    <set>
+      <if test="rawid != null">
+        rawid = #{rawid,jdbcType=INTEGER},
+      </if>
+      <if test="tagid != null">
+        tagid = #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        `data` = #{data,jdbcType=DATE},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.louis.kitty.admin.model.ArticleTextFin">
+    update article_text_fin
+    set rawid = #{rawid,jdbcType=INTEGER},
+      tagid = #{tagid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      `data` = #{data,jdbcType=DATE},
+      likes = #{likes,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.louis.kitty.admin.model.ArticleTextFin">
+    update article_text_fin
+    set rawid = #{rawid,jdbcType=INTEGER},
+      tagid = #{tagid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      `data` = #{data,jdbcType=DATE},
+      likes = #{likes,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
